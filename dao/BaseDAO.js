@@ -88,6 +88,16 @@ class BaseDAO {
     }
 
     /**
+     * 批量添加
+     *
+     * @param {RawDocType<TModel>[]} inserDataList 添加的数据列表
+     * @returns {Promise<ResultDoc<TModel>[]>}
+     */
+    async insertBatch(inserDataList) {
+        return await this.Model.insertMany(inserDataList);
+    }
+
+    /**
      * 删除
      *
      * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} filter 删除条件
