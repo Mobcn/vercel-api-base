@@ -20,8 +20,30 @@
     ],
     "rewrites": [
         {
-            "source": "/:module/:path*",
-            "destination": "/api/:module/:path*"
+            "source": "/(.*)",
+            "destination": "/api/index"
+        }
+    ],
+    "redirects": [
+        {
+            "source": "/controller/(.*)",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/service/(.*)",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/dao/(.*)",
+            "destination": "/",
+            "permanent": true
+        },
+        {
+            "source": "/handler/(.*)",
+            "destination": "/",
+            "permanent": true
         }
     ]
 }

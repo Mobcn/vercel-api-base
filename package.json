@@ -4,7 +4,12 @@
         "#handler": "./handler/index.js",
         "#db": "./dao/database/db.js",
         "#dao/*": "./dao/*",
-        "#service/*": "./service/*"
+        "#service/*": "./service/*",
+        "#controller/*": "./controller/*"
+    },
+    "scripts": {
+        "local": "node build-api.js && vercel dev",
+        "build-api": "node build-api.js"
     },
     "dependencies": {
         "jsonwebtoken": "^9.0.2",
