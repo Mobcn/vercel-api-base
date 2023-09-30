@@ -123,6 +123,9 @@ class BaseDAO {
      * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} update 更新的数据
      */
     async update(filter, update) {
+        if (this.Model.schema.obj.update_time?.type === Date) {
+            update.update_time = new Date();
+        }
         return await this.Model.updateMany(filter, { $set: update });
     }
 
@@ -134,6 +137,9 @@ class BaseDAO {
      * @returns {Promise<ResultDoc<TModel>>}
      */
     async updateById(id, update) {
+        if (this.Model.schema.obj.update_time?.type === Date) {
+            update.update_time = new Date();
+        }
         return await this.Model.findByIdAndUpdate(id, { $set: update });
     }
 }
