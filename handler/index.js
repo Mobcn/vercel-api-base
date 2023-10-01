@@ -152,7 +152,7 @@ class VHandler {
                 return;
             }
             if (!authorizedCheck(params, request)) {
-                response.status(500).end('没有权限');
+                response.status(401).end('没有权限');
                 return;
             }
             new Promise((resolve, reject) => {
