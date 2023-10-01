@@ -47,12 +47,14 @@ class BaseDAO {
      * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} [param0.filter={}] 条件
      * @param {number} [param0.page=1] 页数
      * @param {number} [param0.limit=10] 每页数据条数
+     * @param {{ [key in keyof RawDocType<TModel>]: 1 | -1 }} [param0.sort={ create_time: -1 }] 每页数据条数
      * @returns {Promise<ResultDoc<TModel>[]>}
      */
-    async list({ filter = {}, page = 1, limit = 10 }) {
+    async list({ filter = {}, page = 1, limit = 10, sort = { create_time: -1 } }) {
         return await this.Model.find(filter)
-            .limit(limit)
             .skip((page - 1) * limit)
+            .limit(limit)
+            .sort(sort)
             .exec();
     }
 
