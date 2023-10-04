@@ -48,14 +48,18 @@ class BaseDAO {
      * @param {number} [param0.page=1] 页数
      * @param {number} [param0.limit=10] 每页数据条数
      * @param {{ [key in keyof RawDocType<TModel>]: 1 | -1 }} [param0.sort={ create_time: -1 }] 每页数据条数
-     * @returns {Promise<ResultDoc<TModel>[]>}
+     * @returns {Promise<{ list: ResultDoc<TModel>[]; total: number }>}
      */
     async list({ filter = {}, page = 1, limit = 10, sort = { create_time: -1 } }) {
-        return await this.Model.find(filter)
-            .skip((page - 1) * limit)
-            .limit(limit)
-            .sort(sort)
-            .exec();
+        const [list, total] = await Promise.all(
+            this.Model.find(filter)
+                .skip((page - 1) * limit)
+                .limit(limit)
+                .sort(sort)
+                .exec(),
+            this.Model.count(filter)
+        );
+        return { list, total };
     }
 
     /**
