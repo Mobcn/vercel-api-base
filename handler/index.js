@@ -160,15 +160,19 @@ class VHandler {
                 Promise.resolve(controller(params, request, response))
                     .then((result) => {
                         response.status(200);
+                        response.setHeader('Content-Type', 'application/json;charset=UTF-8');
                         if (typeof result === 'object') {
                             response.json(result instanceof Result ? result : Result.success({ data: result }));
                         } else {
-                            response.end(Result.success({ data: JSON.stringify(result) }));
+                            response.json(Result.success({ data: JSON.stringify(result) }));
                         }
                         resolve();
                     })
                     .catch((error) => reject(error));
-            }).catch((error) => response.json(Result.error({ message: error.message })));
+            }).catch((error) => {
+                response.setHeader('Content-Type', 'application/json;charset=UTF-8');
+                response.json(Result.error({ message: error.message }));
+            });
         };
     }
 }
