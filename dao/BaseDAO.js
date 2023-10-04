@@ -65,14 +65,14 @@ class BaseDAO {
      * @returns {Promise<{ list: ResultDoc<TModel>[]; total: number }>}
      */
     async page({ filter = {}, page = 1, limit = 10, sort = { create_time: -1 } }) {
-        const [list, total] = await Promise.all(
+        const [list, total] = await Promise.all([
             this.Model.find(filter)
                 .skip((page - 1) * limit)
                 .limit(limit)
                 .sort(sort)
                 .exec(),
             this.Model.count(filter)
-        );
+        ]);
         return { list, total };
     }
 
