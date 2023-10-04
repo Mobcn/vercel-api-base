@@ -34,9 +34,23 @@ class BaseService {
 
     /**
      * 获取所有数据
+     *
+     * @param {{ [key in keyof RawDocType<ExtractModel<TDAO>>]: 1 | -1 }} [param0.sort] 排序
      */
-    async listAll() {
-        return await this.DAO.listAll();
+    async listAll({ sort }) {
+        return await this.DAO.listAll({ sort });
+    }
+
+    /**
+     * 获取分页数据
+     *
+     * @param {Object} param0 参数
+     * @param {number} [param0.page] 页数
+     * @param {number} [param0.limit] 每页数据条数
+     * @param {{ [key in keyof RawDocType<ExtractModel<TDAO>>]: 1 | -1 }} [param0.sort] 排序
+     */
+    async page({ page, limit, sort }) {
+        return await this.DAO.page({ page, limit, sort });
     }
 
     /**
