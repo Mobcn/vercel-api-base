@@ -41,16 +41,28 @@ class BaseDAO {
     }
 
     /**
-     * 获取满足条件的数据
+     * 获取满足条件的所有数据
+     *
+     * @param {Object} param0 参数
+     * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} [param0.filter={}] 条件
+     * @param {{ [key in keyof RawDocType<TModel>]: 1 | -1 }} [param0.sort={ create_time: -1 }] 排序
+     * @returns {Promise<ResultDoc<TModel>[]>}
+     */
+    async list({ filter = {}, sort = { create_time: -1 } }) {
+        return await this.Model.find(filter).sort(sort).exec();
+    }
+
+    /**
+     * 获取满足条件的分页数据
      *
      * @param {Object} param0 参数
      * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} [param0.filter={}] 条件
      * @param {number} [param0.page=1] 页数
      * @param {number} [param0.limit=10] 每页数据条数
-     * @param {{ [key in keyof RawDocType<TModel>]: 1 | -1 }} [param0.sort={ create_time: -1 }] 每页数据条数
+     * @param {{ [key in keyof RawDocType<TModel>]: 1 | -1 }} [param0.sort={ create_time: -1 }] 排序
      * @returns {Promise<{ list: ResultDoc<TModel>[]; total: number }>}
      */
-    async list({ filter = {}, page = 1, limit = 10, sort = { create_time: -1 } }) {
+    async page({ filter = {}, page = 1, limit = 10, sort = { create_time: -1 } }) {
         const [list, total] = await Promise.all(
             this.Model.find(filter)
                 .skip((page - 1) * limit)
