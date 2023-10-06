@@ -97,6 +97,24 @@ class BaseDAO {
     }
 
     /**
+     * 获取满足条件数据的总数量
+     *
+     * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} filter 查询条件
+     */
+    async count(filter) {
+        return await this.Model.count(filter);
+    }
+
+    /**
+     * 判断是否存在满足条件的数据
+     *
+     * @param {import('mongoose').FilterQuery<RawDocType<TModel>>} filter 查询条件
+     */
+    async exists(filter) {
+        return (await this.Model.exists(filter)) !== null;
+    }
+
+    /**
      * 添加
      *
      * @param {RawDocType<TModel>} inserData 添加的数据
