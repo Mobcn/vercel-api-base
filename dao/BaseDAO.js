@@ -38,7 +38,7 @@ class BaseDAO {
      * @param {{ [key in keyof RawDocType<TModel>]: 1 | -1 }} [param0.sort={ create_time: -1 }] 排序
      * @returns {Promise<ResultDoc<TModel>[]>}
      */
-    async listAll({ sort }) {
+    async listAll({ sort = { create_time: -1 } }) {
         return await this.list({ sort });
     }
 
