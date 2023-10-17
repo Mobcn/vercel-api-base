@@ -35,9 +35,10 @@ class BaseService {
     /**
      * 获取所有数据
      *
-     * @param {{ [key in keyof RawDocType<ExtractModel<TDAO>>]: 1 | -1 }} [param0.sort] 排序
+     * @param {{ sort?: { [key in keyof RawDocType<ExtractModel<TDAO>>]: 1 | -1 } }} [params] 参数
      */
-    async listAll({ sort }) {
+    async listAll(params) {
+        const { sort } = params || {};
         return await this.DAO.listAll({ sort });
     }
 
