@@ -21,6 +21,7 @@ export default VHandler.buildPOSTAndAuth(
      * @param {string} param0.where 过滤条件
      * @param {string} param0.success_message 成功消息
      * @param {string} param0.error_message 错误消息
+     * @param {boolean} param0.status 状态
      */
     async ({
         _id,
@@ -36,7 +37,8 @@ export default VHandler.buildPOSTAndAuth(
         output_fields,
         where,
         success_message,
-        error_message
+        error_message,
+        status
     }) => {
         const result = await Model.findByIdAndUpdate(_id, {
             $set: {
@@ -53,7 +55,8 @@ export default VHandler.buildPOSTAndAuth(
                 where,
                 success_message,
                 error_message,
-                update_time: new Date()
+                update_time: new Date(),
+                status
             }
         });
         return Result.success({ message: '修改接口成功', data: result });
