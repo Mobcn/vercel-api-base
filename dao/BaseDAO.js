@@ -147,11 +147,11 @@ class BaseDAO {
     /**
      * 删除主键ID对应的数据
      *
-     * @param {any} id 主键ID
+     * @param {any | any[]} id 主键ID
      * @returns {Promise<ResultDoc<TModel>>}
      */
     async deleteById(id) {
-        return await this.Model.findByIdAndDelete(id);
+        return await this.Model.deleteMany({ _id: { $in: id instanceof Array ? id : [id] } });
     }
 
     /**
