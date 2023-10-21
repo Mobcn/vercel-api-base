@@ -50,6 +50,7 @@ class VHandler {
                 vHandler.setting.methods = setting.methods.map((m) => m.toUpperCase());
             }
         }
+        Object.assign(vHandler.setting, setting);
         return vHandler;
     }
 
