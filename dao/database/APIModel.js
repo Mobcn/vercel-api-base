@@ -50,6 +50,10 @@ const info = {
             type: String,
             default: "失败!"
         },
+        raw_handler: {
+            type: String,
+            required: true
+        },
         handler: {
             type: String,
             required: true

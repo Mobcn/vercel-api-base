@@ -12,6 +12,7 @@ export default VHandler.buildPOSTAndAuth(
      * @param {string} param0.path 路径
      * @param {boolean} param0.authorized 是否认证
      * @param {boolean} param0.customize 是否自定义
+     * @param {string} param0.raw_handler 原始处理器
      * @param {string} param0.handler 处理器
      * @param {string} param0.type 类型
      * @param {string} param0.method 请求方法
@@ -27,6 +28,7 @@ export default VHandler.buildPOSTAndAuth(
         path,
         authorized,
         customize,
+        raw_handler,
         handler,
         type,
         method,
@@ -46,6 +48,7 @@ export default VHandler.buildPOSTAndAuth(
             path,
             authorized,
             customize,
+            raw_handler,
             handler,
             type,
             method,
